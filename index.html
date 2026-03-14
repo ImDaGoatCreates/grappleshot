@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Halo Infinite Grappleshot Project</title>
+
+<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<div id="imageViewer">
+    <span id="closeViewer">&times;</span>
+    <img id="fullImage">
+    <div id="magnifierLens"></div>
+</div>
+
+<body>
+
+<header>
+<h1>Halo Infinite Grappleshot Project</h1>
+<p>By I'mDaGoatCreates</p>
+</header>
+
+<nav>
+<button onclick="showSection('overview')">Overview</button>
+<button onclick="showSection('updates')">Project Updates</button>
+<button onclick="showSection('hardware')">Hardware</button>
+<button onclick="showSection('gallery')">Gallery</button>
+<button onclick="showSection('plans')">Future Plans</button>
+<button onclick="showSection('resources')">Resources</button>
+</nav>
+
+
+<section id="overview" class="active">
+<div class="card">
+
+<h2>Project Overview</h2>
+
+<p>
+This website documents the progress of my real-life Halo Infinite Grappleshot project. The goal is to build a wearable device inspired by the grappling hook used in Halo Infinite.
+</p>
+
+<p>
+The Grappleshot will use an ESP-WROOM-32 Mini, motors, and a pushbutton to simulate the functionality of the Grappleshot while remaining safe and portable.
+</p>
+
+<p>
+This site will track hardware development, testing, upgrades, and future ideas for the project.
+</p>
+
+</div>
+</section>
+
+
+<section id="updates">
+<div class="card">
+
+<h2>Project Updates</h2>
+
+<h3>Update #1 — Project Started</h3>
+<p>
+Initial CAD design for aesthetics and base footprint. Researching components and materials for the launching/retracting mechanisms and power distribution systems.
+</p>
+
+<h3>Update #2 — Fitting Components</h3>
+<p>
+Started adding more things to the CAD model, including a basic placeholder motor model and set of model 18650s to check space requirements.
+</p>
+
+<h3>Update #3 — ESP32 Testing</h3>
+<p>
+Started experimenting with the ESP32 microcontroller to control the system. Testing basic GPIO pins and button connection. Test failed, new boards need to be ordered.
+</p>
+
+<h3>Update #4 — Testing Models</h3>
+<p>
+Printed 2 stopblock models to test size and flexibility. The first had too smale of a score in the middle, causing it to over-flex and not spring back. 2nd model had a smaller score, but still had the same problem. A 3rd will be printed with an added 0.5mm of material in the middle to fix this issue.
+</p>
+
+<h3>Update #5 — Component Orders</h3>
+<p>
+Ordered 2 motors (1 spare)
+</p>
+
+</div>
+</section>
+
+
+<section id="hardware">
+<div class="card">
+
+<h2>Hardware Used</h2>
+
+<ul>
+<li>ESP-WROOM-32 Mini microcontroller</li>
+<li>Custom springloaded trigger</li>
+<li>Motorized retraction system</li>
+<li>Rechargeable 4S2P battery pack</li>
+<li>3D printed housing</li>
+</ul>
+
+<p>
+The hardware will change as the project progresses and new solutions are tested.
+</p>
+
+</div>
+</section>
+
+
+<section id="gallery">
+<div class="card">
+
+<h2>Project Gallery</h2>
+
+<p>Prototype photos and testing images will be posted here.</p>
+
+<div class="imageContainer">
+<img class="zoomImage" src="images/grappleshot_prototype.jpg">
+<div class="magnifier"></div>
+</div>
+
+<img src="images/wiring_test.jpg">
+
+</div>
+</section>
+
+
+<section id="plans">
+<div class="card">
+
+<h2>Future Plans</h2>
+
+<ul>
+<li>Integrate motorized retraction mechanism</li>
+<li>Improve pushbutton trigger responsiveness</li>
+<li>Add fabric-padded velcro straps for better fit and comfort</li>
+</ul>
+
+</div>
+</section>
+
+
+<section id="resources">
+<div class="card">
+
+<h2>Resources</h2>
+
+<ul>
+<li><a href="https://www.halowaypoint.com" target="_blank">Halo Waypoint</a></li>
+<li><a href="https://www.espressif.com/en/products/socs/esp32" target="_blank">ESP32 Documentation</a></li>
+<li><a href="https://www.arduino.cc" target="_blank">Arduino Programming Guides</a></li>
+</ul>
+
+</div>
+</section>
+
+
+
+<script>
+
+// ---------------------------
+// Section Navigation
+// ---------------------------
+
+function showSection(id) {
+
+document.querySelectorAll("section").forEach(section => {
+section.classList.remove("active");
+});
+
+document.getElementById(id).classList.add("active");
+
+document.querySelectorAll("nav button").forEach(btn => {
+btn.disabled = false;
+});
+
+const activeButton = document.querySelector(`nav button[onclick="showSection('${id}')"]`);
+
+if(activeButton){
+activeButton.disabled = true;
+}
+
+}
+
+
+
+// ---------------------------
+// Image Viewer + Magnifier
+// ---------------------------
+
+const images = document.querySelectorAll("img");
+const viewer = document.getElementById("imageViewer");
+const fullImage = document.getElementById("fullImage");
+const closeViewer = document.getElementById("closeViewer");
+const lens = document.getElementById("magnifierLens");
+
+let zoom = 2;
+
+
+
+// Open viewer when clicking image
+images.forEach(img => {
+
+img.addEventListener("click", () => {
+
+viewer.style.display = "flex";
+
+fullImage.src = img.src;
+
+lens.style.backgroundImage = `url(${img.src})`;
+
+});
+
+});
+
+
+
+// Magnifier movement
+viewer.addEventListener("mousemove", e => {
+
+const rect = fullImage.getBoundingClientRect();
+
+let x = e.clientX - rect.left;
+let y = e.clientY - rect.top;
+
+
+
+// hide lens if outside image
+if(x < 0 || y < 0 || x > rect.width || y > rect.height){
+
+lens.style.display = "none";
+return;
+
+}
+
+lens.style.display = "block";
+
+
+
+// move magnifier
+lens.style.left = (e.clientX - lens.offsetWidth / 2) + "px";
+lens.style.top = (e.clientY - lens.offsetHeight / 2) + "px";
+
+
+
+// zoom background
+lens.style.backgroundSize =
+(rect.width * zoom) + "px " + (rect.height * zoom) + "px";
+
+
+
+lens.style.backgroundPosition =
+"-" + (x * zoom - lens.offsetWidth / 2) + "px -" +
+(y * zoom - lens.offsetHeight / 2) + "px";
+
+});
+
+
+
+// Close viewer with X
+closeViewer.addEventListener("click", () => {
+
+viewer.style.display = "none";
+lens.style.display = "none";
+
+});
+
+
+
+// Close if clicking outside image
+viewer.addEventListener("click", e => {
+
+if(e.target === viewer){
+
+viewer.style.display = "none";
+lens.style.display = "none";
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
