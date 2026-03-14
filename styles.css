@@ -1,0 +1,239 @@
+:root{
+
+/* Color Palette */
+--green:#4B7F3A;   /* Master Chief armor */
+--blue:#2FA8FF;    /* Halo HUD blue */
+--grey:#2f2f2f;    /* metal / UI panels */
+--black:#0a0a0a;   /* background */
+
+}
+
+/* Body */
+body{
+background:var(--black);
+color:var(--green);
+font-family:Arial;
+margin:0;
+}
+
+/* Header */
+header{
+background:var(--green);
+color:black;
+padding:20px;
+text-align:center;
+}
+
+/* Navigation */
+nav{
+background:var(--grey);
+padding:10px;
+text-align:center;
+}
+
+nav button{
+background:var(--blue);
+color:black;
+border:none;
+padding:12px;
+margin:5px;
+font-weight:bold;
+cursor:pointer;
+transition:all 0.3s ease;
+}
+
+nav button:hover{
+background:var(--green);
+}
+
+/* Sections */
+section{
+display:none;
+padding:30px;
+}
+
+.active{
+display:block;
+}
+
+/* Cards */
+.card{
+border:2px solid var(--green);
+padding:20px;
+background:#111;
+box-shadow:0 0 10px var(--green);
+}
+
+/* Images */
+img{
+width:400px;
+height:auto;
+border:3px solid var(--blue);
+margin-top:15px;
+
+box-shadow:0 0 15px var(--blue),0 0 30px var(--blue);
+transition:transform 0.3s, box-shadow 0.3s;
+display:block;
+}
+
+img:hover{
+transform:scale(1.05);
+box-shadow:0 0 25px var(--blue),0 0 50px var(--blue);
+}
+
+/* Links */
+a{
+color:var(--blue);
+}
+
+/* Footer */
+footer{
+background:var(--grey);
+color:var(--green);
+text-align:center;
+padding:10px;
+}
+
+/* Special images */
+.decayChain{
+width:auto;
+height:auto;
+display:block;
+margin:40px auto;
+border:3px solid var(--blue);
+box-shadow:0 0 20px var(--blue);
+}
+
+/* Buttons */
+button{
+background-color:var(--grey);
+color:var(--green);
+border:2px solid var(--green);
+padding:12px 20px;
+margin:5px 0;
+font-weight:bold;
+cursor:pointer;
+
+box-shadow:0 0 10px var(--green);
+transition:all 0.3s ease;
+}
+
+button:hover:not(:disabled){
+box-shadow:0 0 20px var(--green),0 0 40px var(--green);
+transform:scale(1.05);
+}
+
+button:disabled{
+background-color:#555;
+color:#aaa;
+cursor:not-allowed;
+box-shadow:none;
+}
+
+/* Text inputs */
+input[type="text"]{
+background-color:var(--black);
+color:var(--green);
+border:2px solid var(--green);
+padding:8px 12px;
+font-weight:bold;
+
+box-shadow:0 0 10px var(--green);
+transition:all 0.3s ease;
+}
+
+input[type="text"]:focus{
+outline:none;
+box-shadow:0 0 20px var(--green),0 0 40px var(--green);
+}
+/* Fullscreen Image Viewer */
+
+/* Fullscreen Image Viewer */
+
+#imageViewer{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.92);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:9999;
+overflow:hidden;
+}
+
+/* Fullscreen viewer */
+
+#imageViewer{
+position:fixed;
+top:0;
+left:0;
+
+width:100vw;
+height:100vh;
+
+background:rgba(0,0,0,0.95);
+
+display:none;
+
+justify-content:center;
+align-items:center;
+
+z-index:9999;
+overflow:hidden;
+}
+
+#fullImage{
+position:relative;
+
+max-width:90vw;
+max-height:90vh;
+
+width:auto;
+height:auto;
+
+border:5px solid #2FA8FF;
+
+box-shadow:
+0 0 30px #2FA8FF,
+0 0 60px #2FA8FF,
+0 0 100px #2FA8FF;
+}
+
+/* Magnifying lens */
+
+#magnifierLens{
+position:absolute;
+
+width:175px;
+height:175px;
+
+border:5px solid #2FA8FF;
+border-radius:50%;
+
+pointer-events:none;
+display:none;
+
+box-shadow:
+0 0 20px #2FA8FF,
+0 0 40px #2FA8FF;
+
+background-repeat:no-repeat;
+background-size:400%;
+
+z-index:10000;
+}
+
+/* Close button */
+
+#closeViewer{
+position:absolute;
+top:25px;
+right:50px;
+font-size:60px;
+color:white;
+cursor:pointer;
+font-weight:bold;
+}
