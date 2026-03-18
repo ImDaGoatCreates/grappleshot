@@ -240,16 +240,12 @@ font-weight:bold;
 
 .imageRow {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 images per row */
-    gap: 10px; /* spacing between images */
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
 }
 
 .imageRow img {
     width: 100%;
-    height: auto;
-    cursor: pointer;
-}
-
-.imageRow img {
-    border-radius: 10px;
+    height: 200px;       /* 🔥 THIS is what forces cropping */
+    object-fit: cover;   /* crops evenly from center */
 }
