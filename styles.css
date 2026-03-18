@@ -237,3 +237,15 @@ color:white;
 cursor:pointer;
 font-weight:bold;
 }
+
+.imageRow {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 images per row */
+    gap: 10px; /* spacing between images */
+}
+
+.imageRow img {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
