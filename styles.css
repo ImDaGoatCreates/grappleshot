@@ -249,3 +249,7 @@ font-weight:bold;
     height: auto;
     cursor: pointer;
 }
+
+.imageRow img {
+    border-radius: 10px;
+}
